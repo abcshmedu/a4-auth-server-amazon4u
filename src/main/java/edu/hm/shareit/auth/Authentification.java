@@ -1,11 +1,9 @@
 package edu.hm.shareit.auth;
 
+
 import edu.hm.shareit.mediaService.MediaServiceResult;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.HashSet;
@@ -23,18 +21,45 @@ public class Authentification {
     @Path("login")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response logIn(String username, String password) {
-        if(users.logIn(username, password)){
+    public Response logIn(LoginAttempt loginAttempt) {
+        if (users.logIn(loginAttempt.getUsername(), loginAttempt.getPassword())) {
             Token token = Token.createToken();
-            while(tokens.contains(token)){
+            while (tokens.contains(token)) {
                 token = Token.createToken();
             }
-
             tokens.add(token);
-            return Response.ok().entity(token).build();
+            return MediaServiceResult.loginSuccess(token);
         }
 
-        return null;
+        return MediaServiceResult.LOGIN_FAILURE.getResponse();
     }
 
+    @GET
+    @Path("authorize")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response authorize(Token token){
+        if(tokens.contains(token)){
+            return Response.ok().build();
+        }
+        else{
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    }
+
+    static class LoginAttempt {
+        final String username, password;
+
+        public LoginAttempt(String username, String password) {
+            this.username = username;
+            this.password = password;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+    }
 }
