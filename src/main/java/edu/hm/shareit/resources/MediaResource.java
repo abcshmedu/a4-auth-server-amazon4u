@@ -26,6 +26,10 @@ import javax.ws.rs.client.Client;
 public class MediaResource {
     private static MediaService mediaService = new MediaServiceImplementation();
 
+    public MediaResource() {
+        System.out.println("new instance of MediaResource");
+    }
+
     /**
      * Creates a book (not an exemplar).
      * REST interface: POST /media/books
@@ -214,7 +218,6 @@ public class MediaResource {
         System.out.println("MediaResource >>> isValid >>> " + token);
 
         WebTarget authTarget = ClientBuilder.newClient().target("http://localhost:8082").path("shareit/auth/authorize");
-        //token = "Token : " + token;
         Response response = authTarget.request(MediaType.APPLICATION_JSON_TYPE).header("Token", token).get();
         System.out.println("MediaResource >>> isValid >>> Response: " + response.getStatus());
         if(response.getStatus() == 200) {

@@ -1,6 +1,5 @@
 package edu.hm.shareit.auth;
 
-
 import edu.hm.shareit.mediaService.MediaServiceResult;
 
 import javax.ws.rs.*;
@@ -8,16 +7,16 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.HashSet;
 import java.util.Set;
-
 /**
  *
  */
 @Path("auth")
-public class Authentification {
+public class Authentication {
     private final Users users = new Users();
     private final Set<Token> tokens = new HashSet<>();
 
-    private Authentification() {
+    public Authentication() {
+        System.out.println("instance of Authentication created");
         tokens.add(new Token("DebugToken"));
     }
 
@@ -41,6 +40,7 @@ public class Authentification {
     @GET
     @Path("authorize")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response authorize(Token token){
         System.out.println("Authentifiaction >>> authorize >>> " + token);
         if(tokens.contains(token)){

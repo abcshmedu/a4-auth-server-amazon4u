@@ -30,7 +30,6 @@ class Users {
         if(isUser(username)){
             return users.get(username).equals(passwort);
         }
-
         return false;
     }
 }
