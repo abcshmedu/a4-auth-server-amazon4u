@@ -211,10 +211,12 @@ public class MediaResource {
 
     private boolean isValid(HttpHeaders headers) {
         String token = headers.getRequestHeader("Token").get(0);
-        System.out.println("MediaResource >>> isValid");
+        System.out.println("MediaResource >>> isValid >>> " + token);
+
         WebTarget authTarget = ClientBuilder.newClient().target("http://localhost:8082").path("shareit/auth/authorize");
         //token = "Token : " + token;
         Response response = authTarget.request(MediaType.APPLICATION_JSON_TYPE).header("Token", token).get();
+        System.out.println("MediaResource >>> isValid >>> Response: " + response.getStatus());
         if(response.getStatus() == 200) {
             return true;
         }

@@ -42,6 +42,7 @@ public class Authentification {
     @Path("authorize")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response authorize(Token token){
+        System.out.println("Authentifiaction >>> authorize >>> " + token);
         if(tokens.contains(token)){
             return Response.ok().build();
         }
