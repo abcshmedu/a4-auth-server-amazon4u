@@ -17,6 +17,10 @@ public class Authentification {
     private final Users users = new Users();
     private final Set<Token> tokens = new HashSet<>();
 
+    private Authentification() {
+        tokens.add(new Token("DebugToken"));
+    }
+
     @POST
     @Path("login")
     @Consumes(MediaType.APPLICATION_JSON)
