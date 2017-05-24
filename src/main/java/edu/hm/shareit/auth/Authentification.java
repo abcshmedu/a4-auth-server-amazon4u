@@ -32,7 +32,6 @@ public class Authentification {
 
             tokens.add(token);
             return Response.ok().entity(token).build();
-
         }
 
         return null;

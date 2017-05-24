@@ -9,12 +9,16 @@ import edu.hm.shareit.mediaService.MediaServiceImplementation;
 import edu.hm.shareit.mediaService.MediaServiceResult;
 
 import javax.ws.rs.*;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Arrays;
 import javax.ws.rs.core.Context;
 
+import javax.ws.rs.client.Client;
 /** Web interface of application.
  *
  */
@@ -207,8 +211,13 @@ public class MediaResource {
 
     private boolean isValid(HttpHeaders headers) {
         String token = headers.getRequestHeader("Token").get(0);
-        // TODO AuthServer.isValid(token)
-        return true;
+        WebTarget authTarget = ClientBuilder.newClient().target("http://localhost:8082").path("shareit/auth/Authentification");
+        //token = "Token : " + token;
+        Response response = authTarget.request(MediaType.APPLICATION_JSON_TYPE).header("Token", token).get();
+        if(response.getStatus() == 200) {
+            return true;
+        }
+        return false;
     }
 
 
