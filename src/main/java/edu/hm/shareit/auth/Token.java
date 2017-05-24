@@ -7,7 +7,6 @@ import java.util.Random;
  */
 public class Token {
     final String token;
-    boolean vaild, expired;
 
     public Token(String token) {
         this.token = token;
@@ -15,22 +14,6 @@ public class Token {
 
     public String getToken() {
         return token;
-    }
-
-    public boolean isVaild() {
-        return vaild;
-    }
-
-    public void setVaild(boolean vaild) {
-        this.vaild = vaild;
-    }
-
-    public boolean isExpired() {
-        return expired;
-    }
-
-    public void setExpired(boolean expired) {
-        this.expired = expired;
     }
 
     public static Token createToken(){

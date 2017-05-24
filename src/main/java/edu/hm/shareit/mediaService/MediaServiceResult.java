@@ -1,6 +1,7 @@
 package edu.hm.shareit.mediaService;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.hm.shareit.auth.Token;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -25,9 +26,11 @@ public enum MediaServiceResult {
 
     UNMATCHING_ISBN(Status.BAD_REQUEST, response(Status.BAD_REQUEST, "No Book with that ISBN found")),
 
-    UNMATCHING_BARCODE(Status.BAD_REQUEST, response(Status.BAD_REQUEST, "No disc with that Barcode found"));
+    UNMATCHING_BARCODE(Status.BAD_REQUEST, response(Status.BAD_REQUEST, "No disc with that Barcode found")),
 
+    LOGIN_SUCCESS(Status.OK, response(new Token("asdfasdfRRF23dsfwdf2334143"))),
 
+    LOGIN_FAILURE(Status.NOT_FOUND, response(Status.NOT_FOUND, "username or password is incorrect"));
 
     private final Response.Status status;
     private final Response.ResponseBuilder response;
@@ -78,8 +81,11 @@ public enum MediaServiceResult {
      */
     private static Response.ResponseBuilder response(Status status, String detail) {
         final String reason = reason(status.getStatusCode(), detail);
-        // return Resonse.status(status).entity(reason).build();
-        return Response.status(status);
+        return Response.status(status).entity(reason);
+    }
+
+    private static Response.ResponseBuilder response(Token token){
+        return Response.ok().entity(convertToJson(token));
     }
 
     /**
@@ -107,5 +113,9 @@ public enum MediaServiceResult {
             System.out.println("MediaServiceResult >>> convertToJson() >> Error");
             return "";
         }
+    }
+
+    public static Response loginSuccess(Token token){
+        return Response.ok().entity(token).build();
     }
 }
