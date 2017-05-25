@@ -3,6 +3,8 @@ package edu.hm.shareit.auth;
 import edu.hm.shareit.mediaService.MediaServiceResult;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.HashSet;
@@ -39,9 +41,10 @@ public class Authentication {
 
     @GET
     @Path("authorize")
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response authorize(Token token){
+    public Response authorize(@Context HttpHeaders headers){
+        String header = headers.getRequestHeader("Token").get(0);
+        Token token = new Token(header);
         System.out.println("Authentifiaction >>> authorize >>> " + token);
         if(tokens.contains(token)){
             return Response.ok().build();
