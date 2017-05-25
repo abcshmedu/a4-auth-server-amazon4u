@@ -4,13 +4,13 @@ import java.util.Random;
 
 
 public class Token {
-    final String token;
+    private final String token;
 
     public Token(String token) {
         this.token = token;
     }
 
-    private Token(){
+    public Token(){
         this.token = "";
     }
 

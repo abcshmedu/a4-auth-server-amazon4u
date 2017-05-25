@@ -17,7 +17,7 @@ public final class JettyStarter {
     }
 
     public static final String APP_URL = "/";
-    public static final int PORT = 8082;
+    public static final int PORT = 8080;
     public static final String WEBAPP_DIR = "./src/main/webapp/";
 
     /**
