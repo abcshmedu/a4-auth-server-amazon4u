@@ -63,7 +63,7 @@ public class AuthenticationTest {
     }
 
     @Test
-    public void multipleLogIns() throws Exception {
+    public void LogInTenTimes() throws Exception {
         for(int i = 0; i < 10; i++) {
             final Response have = LOG_IN_TARGET
                     .request(MediaType.APPLICATION_JSON_TYPE)
@@ -77,7 +77,7 @@ public class AuthenticationTest {
     }
 
     @Test
-    public void firstLogInFail() throws Exception {
+    public void LogInFail() throws Exception {
         final Response have = LOG_IN_TARGET
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .post(
@@ -91,7 +91,7 @@ public class AuthenticationTest {
     }
 
     @Test
-    public void firstLogInFailTenTimes() throws Exception {
+    public void LogInFailTenTimes() throws Exception {
         for(int i = 0; i < 10; i++) {
             final Response have = LOG_IN_TARGET
                     .request(MediaType.APPLICATION_JSON_TYPE)
