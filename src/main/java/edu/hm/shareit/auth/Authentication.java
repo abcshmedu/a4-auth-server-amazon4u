@@ -56,6 +56,10 @@ public class Authentication {
 
     static class LoginAttempt {
         final String username, password;
+        public LoginAttempt() {
+            this.username = "";
+            this.password = "";
+        }
 
         public LoginAttempt(String username, String password) {
             this.username = username;

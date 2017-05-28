@@ -24,7 +24,7 @@ public class Token {
         String token = "";
 
         for(int i = 0; i < 50; i++){
-            token += (char) random.nextInt();
+            token += (char) random.nextInt(255);
         }
 
         return new Token(token);
