@@ -14,8 +14,8 @@ import java.util.Set;
  */
 @Path("auth")
 public class Authentication {
-    private final Users users = new Users();
-    private final Set<Token> tokens = new HashSet<>();
+    private final static Users users = new Users();
+    private final static Set<Token> tokens = new HashSet<>();
 
     public Authentication() {
         System.out.println("instance of Authentication created");
@@ -54,7 +54,7 @@ public class Authentication {
         }
     }
 
-    static class LoginAttempt {
+    public static class LoginAttempt {
         final String username, password;
         public LoginAttempt() {
             this.username = "";
