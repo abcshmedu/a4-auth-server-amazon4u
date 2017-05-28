@@ -18,9 +18,7 @@ import edu.hm.shareit.auth.Token;
 import static org.junit.Assert.*;
 import static edu.hm.shareit.auth.Authentication.*;
 
-/**
- * Created by aykut on 28.05.2017.
- */
+
 public class AuthenticationTest {
     static final Client CLIENT = ClientBuilder.newClient();
     static final WebTarget LOG_IN_TARGET = CLIENT.target("http://localhost:8080").path("shareit/auth/login");

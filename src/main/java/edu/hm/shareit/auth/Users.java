@@ -1,7 +1,5 @@
 package edu.hm.shareit.auth;
 
-import com.sun.istack.internal.NotNull;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +14,7 @@ class Users {
     }
 
 
-    public boolean addUser(@NotNull String username, @NotNull String passwort) {
+    public boolean addUser(String username, String passwort) {
         if (!users.containsKey(username)) {
             users.put(username, passwort);
             return true;
@@ -24,11 +22,11 @@ class Users {
         return false;
     }
 
-    public boolean isUser(@NotNull String username){
+    public boolean isUser(String username){
         return users.containsKey(username);
     }
 
-    public boolean logIn(@NotNull String username, @NotNull String passwort){
+    public boolean logIn(String username,String passwort){
         if(isUser(username)){
             return users.get(username).equals(passwort);
         }
