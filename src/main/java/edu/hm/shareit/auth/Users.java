@@ -7,12 +7,9 @@ import java.util.Map;
 class Users {
     private Map<String, String> users = new HashMap<>();
 
-
-
     Users() {
         addUser("Rick Astley", "Never gonna give you up!");
     }
-
 
     public boolean addUser(String username, String passwort) {
         if (!users.containsKey(username)) {
